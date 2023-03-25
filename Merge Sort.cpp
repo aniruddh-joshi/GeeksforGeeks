@@ -24,12 +24,12 @@ class Solution
             }
     }
     public:
-    void mergeSort(int arr[], int l, int r)
+    void merge_sort(int arr[], int l, int r)
     {
         if(l>=r) return ;
         int m=l+(r-l)/2;
-        mergeSort(arr,l,m);
-        mergeSort(arr,m+1,r);
+        merge_sort(arr,l,m);
+        merge_sort(arr,m+1,r);
         merge(arr,l,m,r);
     }
 };
