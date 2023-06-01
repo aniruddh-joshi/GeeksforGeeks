@@ -6,37 +6,18 @@ using namespace std;
 class Solution
 {
 	public:
-	
-	    void solve(string S,vector<string>&ans,int index){
-	        //base call
-	        if(index==S.length()){
-	            ans.push_back(S);
-	            return;
-	        }
-	        for(int i=index;i<S.length();i++){
-	            if(i>index && S[i]==S[i-1]){
-	                continue;       //skip duplicate 
-	            }
-	            swap(S[index],S[i]);
-	            solve(S,ans,index+1);
-	            
-	            //backtracking
-	            swap(S[i],S[index]);
-	        }
-	    }
-	    
-	    
-		vector<string>find_permutation(string S)
+		vector<string>find_permutation(string str)
 		{
+		    // Code here there
 		    vector<string>ans;
-		    int index=0;
-		    
-		    solve(S,ans,index);
-		   //lexicographically sorted order
-		    sort(ans.begin(),ans.end());
-		    
-		    return ans;
-		}
+		     sort(str.begin(), str.end());
+    do {
+        ans.push_back(str);
+        } 
+    while (next_permutation(str.begin(), str.end()));
+		
+		return ans;
+		}	
 };
 
 
