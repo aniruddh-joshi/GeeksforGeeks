@@ -1,34 +1,28 @@
 //{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
-# define mod 1000000007
 
 // } Driver Code Ends
+
 class Solution{
     public:
     //You need to complete this fucntion
     
     long long power(int N,int R)
     {
-       //Your code here
-    long long m=1000000007;
-       if(R==0){
-           return 1;
-       }
-       if(R==1){
-           return N;
-       }
-        long long ans=power(N,R/2)%m;
-        ans=(ans*ans)%m;
-        
-        if(R%2==0){
-            return ans%m;
-        }
-        if(R%2==1){
-            return (N*ans)%m;
-        }
+      const int MOD=1000000007;
+      
+      if(R==0)  return 1;
+      
+      if(R%2==0){
+          long long temp=power(N,R/2);
+          return (temp*temp)%MOD;
+      }
+      else{
+          long long temp=power(N,R-1);
+          return (N*temp)%MOD;
+      }
     }
-
 };
 
 //{ Driver Code Starts.
