@@ -1,0 +1,104 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+class Matrix
+{
+public:
+    template <class T>
+    static void input(vector<vector<T>> &A,int n,int m)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                scanf("%d ",&A[i][j]);
+            }
+        }
+    }
+ 
+    template <class T>
+    static void print(vector<vector<T>> &A)
+    {
+        for (int i = 0; i < A.size(); i++)
+        {
+            for (int j = 0; j < A[i].size(); j++)
+            {
+                cout << A[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+
+// } Driver Code Ends
+class Solution {
+public:
+    bool solve(int node, int parent, vector<int> adj[], vector<int> &vis) {
+        vis[node] = 1;
+        
+        for(auto j: adj[node]) {
+            if(!vis[j]) {
+                if(solve(j, node, adj, vis))
+                    return true;
+            } else if(parent != j)
+                return true;
+        }
+        
+        return false;
+    }
+
+    int isTree(int n, int m, vector<vector<int>> &pair) {
+        vector<int> adj[n];
+        for(auto i: pair) {
+            adj[i[0]].push_back(i[1]);
+            adj[i[1]].push_back(i[0]);
+        }
+        
+        vector<int> vis(n);
+        bool res = false;
+        int count = 0;
+        
+        for(int i = 0; i < n; i++) {
+            if(!vis[i]) {
+                count++;
+                res = res | solve(i, -1, adj, vis);
+            }
+        }
+        
+        if(count > 1 or res) // more than 1 component
+            return false;
+            
+        return true;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main(){
+    int t;
+    scanf("%d ",&t);
+    while(t--){
+        
+        int n; 
+        scanf("%d",&n);
+        
+        
+        int m; 
+        scanf("%d",&m);
+        
+        
+        vector<vector<int>> edges(m, vector<int>(2));
+        Matrix::input(edges,m,2);
+        
+        Solution obj;
+        int res = obj.isTree(n, m, edges);
+        
+        cout<<res<<endl;
+        
+    }
+}
+
+// } Driver Code Ends
