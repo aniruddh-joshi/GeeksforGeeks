@@ -22,29 +22,37 @@ bool isSubSequence(vector<int> &v1, vector<int> &v2) {
 // Function to find three numbers in the given array
 // such that arr[smaller[i]] < arr[i] < arr[greater[i]]
 
+// Function to find three numbers in the given array
+// such that arr[smaller[i]] < arr[i] < arr[greater[i]]
+
 class Solution {
-  public:
+public:
     vector<int> find3Numbers(vector<int> &arr) {
-        // Code here
-        int n=arr.size();
-        vector<int>v;
-        
-        for(int i=0; i<n; i++){
-            for(int j=i+1; j<n; j++){
-                if(arr[i]>= arr[j]) continue;
-                for(int k=j+1; k<n;k++){
-                    if(arr[i]<arr[j] && arr[j]<arr[k]){
-                    v.push_back(arr[i]) ;
-                    v.push_back(arr[j]) ;
-                    v.push_back(arr[k]) ;
-                    
-                    return v;
-                    }
-                }
+        int n = arr.size();
+        if (n < 3) return {};
+
+        vector<int> leftMin(n), rightMax(n);
+
+        // Fill leftMin array
+        leftMin[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            leftMin[i] = min(leftMin[i - 1], arr[i]);
+        }
+
+        // Fill rightMax array
+        rightMax[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = max(rightMax[i + 1], arr[i]);
+        }
+
+        // Find the triplet
+        for (int i = 1; i < n - 1; i++) {
+            if (arr[i] > leftMin[i] && arr[i] < rightMax[i]) {
+                return {leftMin[i], arr[i], rightMax[i]};
             }
         }
-        
-        return v;
+
+        return {};
     }
 };
 
