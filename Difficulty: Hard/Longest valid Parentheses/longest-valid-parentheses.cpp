@@ -4,51 +4,53 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
 // User function Template for C++
 
-#include <stack>
-#include <string>
-#include <algorithm>
-
 class Solution {
-public:
-    int maxLength(std::string S) {
-        std::stack<int> stk;
-        stk.push(-1); // Initialize stack with -1 to handle the base case
-        int maxLength = 0;
-
-        for (int i = 0; i < S.length(); ++i) {
-            if (S[i] == '(') {
-                stk.push(i); // Push the index of '('
-            } else {
-                stk.pop(); // Pop the last index
-
-                if (stk.empty()) {
-                    stk.push(i); // Push current index if stack is empty
-                } else {
-                    // Calculate the length of the current valid substring
-                    maxLength = std::max(maxLength, i - stk.top());
+  public:
+    int maxLength(string str) {
+        
+        int n=str.length(),maxi=0,cnt=0;
+        stack<int>s;
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]=='(')
+                s.push(i);
+            else
+            {
+                if(!s.empty())
+                {
+                    str[s.top()]='1';  // convert sting 
+                    str[i]='1';
+                    s.pop();
                 }
             }
         }
-
-        return maxLength;
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]=='1') cnt++;
+            else    cnt=0;
+            maxi=max(maxi,cnt);  // check for maximum substring
+        }
+        return maxi;
     }
-};
 
+
+};
 
 //{ Driver Code Starts.
 
-int main(){
+int main() {
     int t;
-    cin>>t;
-    while(t--){
+    cin >> t;
+    while (t--) {
         string S;
-        cin>>S;
-        
+        cin >> S;
+
         Solution ob;
-        cout<<ob.maxLength(S)<<"\n";
+        cout << ob.maxLength(S) << "\n";
     }
     return 0;
 }
