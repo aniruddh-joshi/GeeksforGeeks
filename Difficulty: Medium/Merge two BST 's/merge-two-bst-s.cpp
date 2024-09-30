@@ -29,7 +29,7 @@ Node* buildTree(string str) {
     for (string str; iss >> str;)
         ip.push_back(str);
 
-    // Create the root of the tree
+    // Create the root of the tree.....
     Node* root = new Node(stoi(ip[0]));
 
     // Push the root to the queue
@@ -80,6 +80,7 @@ Node* buildTree(string str) {
 
 
 // } Driver Code Ends
+
 /*
 struct Node {
     int data;
