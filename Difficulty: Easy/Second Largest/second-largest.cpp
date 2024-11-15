@@ -6,6 +6,9 @@ using namespace std;
 
 // } Driver Code Ends
 // User function template for C++
+
+
+// User function template for C++
 class Solution {
   public:
     // Function returns the second
@@ -48,6 +51,7 @@ int main() {
         Solution ob;
         int ans = ob.getSecondLargest(arr);
         cout << ans << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
