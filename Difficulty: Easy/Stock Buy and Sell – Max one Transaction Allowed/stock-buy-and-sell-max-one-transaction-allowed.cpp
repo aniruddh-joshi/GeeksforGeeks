@@ -4,20 +4,22 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int maximumProfit(vector<int> &prices) {
-        // code here
-        int mini=prices[0];
         int ans=0;
-        
-        for(int i=0;i<prices.size();i++){
-            mini=min(prices[i],mini);
-            ans=max(ans,prices[i]-mini);
+        int buy=prices[0];
+        for(int i=1;i<prices.size();i++){
+            if(prices[i]>=buy)
+            ans=max(ans,prices[i]-buy);
+            else
+            buy=prices[i];
         }
         return ans;
     }
 };
+
 
 
 //{ Driver Code Starts.
